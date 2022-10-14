@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="11" time="228.755" timestamp="2022-10-14T18:07:19.478822" hostname="LAPTOP-BB6JI5H1"><testcase classname="testcases.test_cases" name="test_login" time="35.876"><failure message="AssertionError: Login unsuccessful&#10;assert False">browser_setup = &lt;pages.home.Home object at 0x000001FBEE816B50&gt;
+
+    def test_login(browser_setup):
+        """Verify the login feature"""
+        home_page = browser_setup
+        assert home_page.is_page_loaded(), "Failed to load the home page"
+        login_page = home_page.login()
+        login_page.login(user['email'], user['password'])
+        success = login_page.validate_login_successful(user['username'])
+&gt;       assert success, "Login unsuccessful"
+E       AssertionError: Login unsuccessful
+E       assert False
+
+testcases\test_cases.py:11: AssertionError</failure></testcase><testcase classname="testcases.test_cases" name="test_track_item_from_home_page" time="37.423"><failure message="selenium.common.exceptions.TimeoutException: Message: &#10;Stacktrace:&#10;Backtrace:&#10;&#09;Ordinal0 [0x0088DF13+2219795]&#10;&#09;Ordinal0 [0x00822841+1779777]&#10;&#09;Ordinal0 [0x0073423D+803389]&#10;&#09;Ordinal0 [0x00763025+995365]&#10;&#09;Ordinal0 [0x007631EB+995819]&#10;&#09;Ordinal0 [0x00790F52+1183570]&#10;&#09;Ordinal0 [0x0077E844+1108036]&#10;&#09;Ordinal0 [0x0078F192+1175954]&#10;&#09;Ordinal0 [0x0077E616+1107478]&#10;&#09;Ordinal0 [0x00757F89+950153]&#10;&#09;Ordinal0 [0x00758F56+954198]&#10;&#09;GetHandleVerifier [0x00B82CB2+3040210]&#10;&#09;GetHandleVerifier [0x00B72BB4+2974420]&#10;&#09;GetHandleVerifier [0x00926A0A+565546]&#10;&#09;GetHandleVerifier [0x00925680+560544]&#10;&#09;Ordinal0 [0x00829A5C+1808988]&#10;&#09;Ordinal0 [0x0082E3A8+1827752]&#10;&#09;Ordinal0 [0x0082E495+1827989]&#10;&#09;Ordinal0 [0x008380A4+1867940]&#10;&#09;BaseThreadInitThunk [0x779CFA29+25]&#10;&#09;RtlGetAppContainerNamedObjectPath [0x77E17B5E+286]&#10;&#09;RtlGetAppContainerNamedObjectPath [0x77E17B2E+238]">browser_setup = &lt;pages.home.Home object at 0x000001FBEE816E80&gt;
+
+    def test_track_item_from_home_page(browser_setup):
+        """Tracking from home page for a single item"""
+        home_page = browser_setup
+        tracking_page = home_page.track_item_from_homepage(tracking_ids['single_item'])
+&gt;       track_result = tracking_page.validate_track_result_single_item()
+
+testcases\test_cases.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages\tracking.py:27: in validate_track_result_single_item
+    element = self.tracking_results_single_item_text_element
+pages\tracking.py:14: in tracking_results_single_item_text_element
+    return self.wait.until(element_is_visible_by_xpath('//div[@class="notification__message text-left"]'))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;selenium.webdriver.support.wait.WebDriverWait (session="c3e9ec5ea127935f497d43f2d91fd10c")&gt;, method = &lt;function visibility_of_element_located.&lt;locals&gt;._predicate at 0x000001FBEE821A60&gt;, message = ''
+
+    def until(self, method, message: str = ""):
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, 'screen', None)
+                stacktrace = getattr(exc, 'stacktrace', None)
+            time.sleep(self._poll)
+            if time.monotonic() &gt; end_time:
+                break
+&gt;       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       Backtrace:
+E       	Ordinal0 [0x0088DF13+2219795]
+E       	Ordinal0 [0x00822841+1779777]
+E       	Ordinal0 [0x0073423D+803389]
+E       	Ordinal0 [0x00763025+995365]
+E       	Ordinal0 [0x007631EB+995819]
+E       	Ordinal0 [0x00790F52+1183570]
+E       	Ordinal0 [0x0077E844+1108036]
+E       	Ordinal0 [0x0078F192+1175954]
+E       	Ordinal0 [0x0077E616+1107478]
+E       	Ordinal0 [0x00757F89+950153]
+E       	Ordinal0 [0x00758F56+954198]
+E       	GetHandleVerifier [0x00B82CB2+3040210]
+E       	GetHandleVerifier [0x00B72BB4+2974420]
+E       	GetHandleVerifier [0x00926A0A+565546]
+E       	GetHandleVerifier [0x00925680+560544]
+E       	Ordinal0 [0x00829A5C+1808988]
+E       	Ordinal0 [0x0082E3A8+1827752]
+E       	Ordinal0 [0x0082E495+1827989]
+E       	Ordinal0 [0x008380A4+1867940]
+E       	BaseThreadInitThunk [0x779CFA29+25]
+E       	RtlGetAppContainerNamedObjectPath [0x77E17B5E+286]
+E       	RtlGetAppContainerNamedObjectPath [0x77E17B2E+238]
+
+venv\lib\site-packages\selenium\webdriver\support\wait.py:90: TimeoutException</failure></testcase><testcase classname="testcases.test_cases" name="test_track_multiple_items_from_home_page" time="34.108"><failure message="selenium.common.exceptions.TimeoutException: Message: &#10;Stacktrace:&#10;Backtrace:&#10;&#09;Ordinal0 [0x0088DF13+2219795]&#10;&#09;Ordinal0 [0x00822841+1779777]&#10;&#09;Ordinal0 [0x0073423D+803389]&#10;&#09;Ordinal0 [0x00763025+995365]&#10;&#09;Ordinal0 [0x007631EB+995819]&#10;&#09;Ordinal0 [0x00790F52+1183570]&#10;&#09;Ordinal0 [0x0077E844+1108036]&#10;&#09;Ordinal0 [0x0078F192+1175954]&#10;&#09;Ordinal0 [0x0077E616+1107478]&#10;&#09;Ordinal0 [0x00757F89+950153]&#10;&#09;Ordinal0 [0x00758F56+954198]&#10;&#09;GetHandleVerifier [0x00B82CB2+3040210]&#10;&#09;GetHandleVerifier [0x00B72BB4+2974420]&#10;&#09;GetHandleVerifier [0x00926A0A+565546]&#10;&#09;GetHandleVerifier [0x00925680+560544]&#10;&#09;Ordinal0 [0x00829A5C+1808988]&#10;&#09;Ordinal0 [0x0082E3A8+1827752]&#10;&#09;Ordinal0 [0x0082E495+1827989]&#10;&#09;Ordinal0 [0x008380A4+1867940]&#10;&#09;BaseThreadInitThunk [0x779CFA29+25]&#10;&#09;RtlGetAppContainerNamedObjectPath [0x77E17B5E+286]&#10;&#09;RtlGetAppContainerNamedObjectPath [0x77E17B2E+238]">browser_setup = &lt;pages.home.Home object at 0x000001FBEE7D7370&gt;
+
+    def test_track_multiple_items_from_home_page(browser_setup):
+        """Tracking from home page for multiple items"""
+        home_page = browser_setup
+        tracking_page = home_page.track_multiple_items_from_homepage(tracking_ids['multiple_items'])
+&gt;       track_result = tracking_page.validate_track_result_multi_items()
+
+testcases\test_cases.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages\tracking.py:34: in validate_track_result_multi_items
+    self.tracking_results_multiple_items_summary_text_element
+pages\tracking.py:18: in tracking_results_multiple_items_summary_text_element
+    return self.wait.until(element_is_visible_by_xpath('//h1[text()="Summary Tracking results"]'))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;selenium.webdriver.support.wait.WebDriverWait (session="501df6638476abbbc60086f141ee0aec")&gt;, method = &lt;function visibility_of_element_located.&lt;locals&gt;._predicate at 0x000001FBEE928CA0&gt;, message = ''
+
+    def until(self, method, message: str = ""):
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, 'screen', None)
+                stacktrace = getattr(exc, 'stacktrace', None)
+            time.sleep(self._poll)
+            if time.monotonic() &gt; end_time:
+                break
+&gt;       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       Backtrace:
+E       	Ordinal0 [0x0088DF13+2219795]
+E       	Ordinal0 [0x00822841+1779777]
+E       	Ordinal0 [0x0073423D+803389]
+E       	Ordinal0 [0x00763025+995365]
+E       	Ordinal0 [0x007631EB+995819]
+E       	Ordinal0 [0x00790F52+1183570]
+E       	Ordinal0 [0x0077E844+1108036]
+E       	Ordinal0 [0x0078F192+1175954]
+E       	Ordinal0 [0x0077E616+1107478]
+E       	Ordinal0 [0x00757F89+950153]
+E       	Ordinal0 [0x00758F56+954198]
+E       	GetHandleVerifier [0x00B82CB2+3040210]
+E       	GetHandleVerifier [0x00B72BB4+2974420]
+E       	GetHandleVerifier [0x00926A0A+565546]
+E       	GetHandleVerifier [0x00925680+560544]
+E       	Ordinal0 [0x00829A5C+1808988]
+E       	Ordinal0 [0x0082E3A8+1827752]
+E       	Ordinal0 [0x0082E495+1827989]
+E       	Ordinal0 [0x008380A4+1867940]
+E       	BaseThreadInitThunk [0x779CFA29+25]
+E       	RtlGetAppContainerNamedObjectPath [0x77E17B5E+286]
+E       	RtlGetAppContainerNamedObjectPath [0x77E17B2E+238]
+
+venv\lib\site-packages\selenium\webdriver\support\wait.py:90: TimeoutException</failure></testcase><testcase classname="testcases.test_cases" name="test_ship_an_item_without_account" time="14.067" /><testcase classname="testcases.test_cases" name="test_returns_from_shipping_dropdown" time="12.241" /><testcase classname="testcases.test_cases" name="test_fedex_virtual_assistant" time="18.070" /><testcase classname="testcases.test_cases" name="test_track_item_from_dropdown_menu" time="14.544" /><testcase classname="testcases.test_cases" name="test_validate_new_customer_center_page" time="13.050" /><testcase classname="testcases.test_cases" name="test_validate_locations" time="21.284" /><testcase classname="testcases.test_cases" name="test_validate_manage_billing_page" time="13.390" /><testcase classname="testcases.test_cases" name="test_validate_account_management_page" time="14.516" /></testsuite></testsuites>
