@@ -1,0 +1,16 @@
+pipeline {
+
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                bat """
+                    cd C:\\Users\\nagar\\Desktop\\Python\\GuiAutomationFrameworkFedex
+                    call .\\venv\\Scripts\\activate
+                    pytest --capture=sys -rP .\\testcases\\test_cases.py --junitxml=.\\reports\\output.xml --html=.\\reports\\pytest_report.html
+                """
+            }
+        }
+    }
+}
