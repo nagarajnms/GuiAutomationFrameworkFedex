@@ -12,4 +12,5 @@ class BasePage:
         self.wait.until(self.is_page_loaded)
 
     def is_page_loaded(self, *args):
+        """Waits for a page to be completely loaded"""
         return self.driver.execute_script("return document.readyState == 'complete'")
